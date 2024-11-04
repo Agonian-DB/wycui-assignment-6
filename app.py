@@ -38,14 +38,11 @@ def generate_plots(N, mu, sigma2, S):
     for _ in range(S):
         X_sim = np.random.uniform(0, 1, N)
         Y_sim = X_sim + np.random.normal(mu, sigma2 ** 0.5, N)
-
-        # 拟合线性回归模型
         sim_model = LinearRegression()
         sim_model.fit(X_sim.reshape(-1, 1), Y_sim)
         slopes.append(sim_model.coef_[0])
         intercepts.append(sim_model.intercept_)
 
-    # 绘制斜率和截距的直方图
     plt.figure(figsize=(10, 5))
     plt.hist(slopes, bins=20, alpha=0.5, color="blue", label="Slopes")
     plt.hist(intercepts, bins=20, alpha=0.5, color="orange", label="Intercepts")
